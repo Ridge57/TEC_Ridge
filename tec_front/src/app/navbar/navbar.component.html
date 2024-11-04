@@ -1,0 +1,146 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg fixed-top bg-light navbar-light shadow">
+
+    <div class="container">
+        <a class="navbar-brand" routerLink="/home"><img id="MDB-logo" src="../../assets/logo/logo.png" alt="TEC Logo"
+                draggable="false" height="60" /></a>
+        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+            data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="mx-2 col-3">
+            <input type="text" class="form-control" id="search" placeholder="Rechercher sur Tousencommun">
+        </div>
+
+        <div class="mx-2 col-3">
+            <button type="button" *ngIf="this.connectedUser" (click)="initModal()" data-bs-toggle="modal"
+                data-bs-target="#posterAnnonce" class="btn col-12 btn-tec" style="font-weight: bold;">
+                <i class="bi bi-plus-circle m-1"></i>Poster une annonce
+            </button>
+            <button type="button" *ngIf="!this.connectedUser" data-bs-toggle="modal" data-bs-target="#connectezvous"
+                class="btn col-12 btn-tec" style="font-weight: bold;">
+                <i class="bi bi-plus-circle m-1"></i>Poster une annonce
+            </button>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav align-items-center">
+                <li class="nav-item">
+                    <button type="button" class="btn btn-light mx-2" (click)="goToFavoris()"><i
+                            class="bi bi-heart pe-2"></i>Favoris</button>
+                </li>
+                <li class="nav-item">
+                    <button type="button" class="btn btn-light mx-2" (click)="goToMessages()"><i
+                            class="bi bi-chat-right-text pe-2"></i>Message</button>
+                </li>
+                <li class="nav-item">
+                    <button *ngIf="!connectedUser" type="button" routerLink="/connexion" routerLinkActive="active"
+                        ariaCurrentWhenActive="page" class="btn btn-light mx-2"><i class="bi bi-person pe-2"></i>Se
+                        connecter</button>
+                    <div class="dropdown" *ngIf="connectedUser">
+                        <button class="btn dropdown-toggle btn-tec" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false"><i class="bi bi-hand-thumbs-up"></i>
+                            {{prenom}}
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><button routerLink="/annonces" class="dropdown-item" type="button">Mes annonces</button>
+                            </li>
+                            <li><button routerLink="/account" class="dropdown-item" type="button">Mon compte</button>
+                            </li>
+                            <li><button class="dropdown-item" type="button" (click)="deconnexion()">Se
+                                    déconnecter</button></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br />
+<br />
+<br />
+<br />
+
+<!-- Modal Poster une annonce-->
+<div class="modal fade" data-bs-backdrop="static" id="posterAnnonce" tabindex="-1" aria-labelledby="posterAnnonceLabel"
+    aria-hidden="true">
+    <p-toast></p-toast>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <div class="d-flex justify-content-center mb-3">
+                    <h3 class="modal-title fs-5" id="posterAnnonceLabel">Poster une annonce</h3>
+                </div>
+                <div class="card-body text-black">
+
+
+                    <div class="mb-4">
+                        <div class="form-floating">
+                            <select class="form-select" aria-label="type" id="type" (change)="selectType($event)">
+                                <option disabled selected value></option>
+                                <option value="Besoin">J'ai besoin de quelque chose</option>
+                                <option value="Offre">J'offre quelque chose (produit ou service)</option>
+                            </select>
+                            <label for="type">Type d'annonce</label>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="form-floating form-group">
+                            <select class="form-control" aria-label="categorie" id="categorie"
+                                (change)="selectCategorie($event)">
+                                <option disabled selected value></option>
+                                <option *ngFor="let c of categories" value='{{c.id}}'>
+                                    {{c.nom}}</option>
+                            </select>
+                            <label for="categorie">Catégorie</label>
+                        </div>
+                    </div>
+
+
+                    <div class="mb-4">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="Titre" (change)="setTitre($event)">
+                            <label for="Titre">Titre (court)</label>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                            placeholder="Description" (change)="setDescription($event)"></textarea>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                <button type="button" class="btn" id="poster" (click)="save()" data-bs-dismiss="modal">Poster mon
+                    annonce</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Vous devez être connecté-->
+<div class="modal fade" data-bs-backdrop="static" id="connectezvous" tabindex="-1" aria-labelledby="connectezvousLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <div class="d-flex justify-content-center mb-3">
+                    <h3 class="modal-title fs-5" id="connectezvousLabel">Vous devez être connecté</h3>
+                </div>
+                <div class="card-body text-black">
+
+                </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">annuler</button>
+                <button type="button" class="btn" id="poster" routerLink="/connexion" data-bs-dismiss="modal">se
+                    connecter</button>
+            </div>
+        </div>
+    </div>
+</div>

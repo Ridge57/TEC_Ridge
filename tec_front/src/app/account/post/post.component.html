@@ -1,0 +1,106 @@
+<app-navbar></app-navbar>
+<app-sidebar></app-sidebar>
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Mes annonces</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="">Home</a></li>
+                <li class="breadcrumb-item">Profil</li>
+                <li class="breadcrumb-item active">Annonces</li>
+            </ol>
+        </nav>
+    </div>
+    <p-toast></p-toast>
+    <section class="section annonces row">
+        <div class="card mx-2" style="width: 18rem;" *ngFor="let p of posts">
+            <div class="card-body">
+                <span class="d-flex justify-content-between">
+                    <h5 class="breadcrumb">{{p.titre}}</h5>
+                    <span *ngIf="favoris.indexOf(p.id) == -1"><i class="bi bi-heart" (click)="toogleFavoris(p.id)"
+                            data-bs-toggle="tooltip" data-bs-placement="top" title="mettre en favoris"></i></span>
+                    <span *ngIf="favoris.indexOf(p.id) >= 0"><i style="color: rgb(240, 83, 33);"
+                            class="bi bi-heart-fill" (click)="toogleFavoris(p.id)" data-bs-toggle="tooltip"
+                            data-bs-placement="top" title="retirer des favoris"></i></span>
+                </span>
+
+                <p class="card-text breadcrumb">{{p.description.substring(0,30)}}..</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item fw-light fst-italic fs-6"><span
+                        class="badge bg-primary">{{p.categorie.nom}}</span></li>
+                <li class="list-group-item fw-light fst-italic fs-6"><span class="badge bg-warning">{{p.type}}</span>
+                </li>
+                <li class="list-group-item fw-light fst-italic fs-6">Publié le {{p.datePublication | date:'d MMMM y'}}
+                </li>
+            </ul>
+            <div class="card-body d-flex justify-content-around">
+                <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
+                    (click)="setPostToConsult(p)">consulter</button>
+                <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal"
+                    data-bs-target="#confirmerSuppression" (click)="getCandidateForDeletion(p.id)">supprimer</button>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- confirmer suppression modal -->
+<div class="modal fade" data-bs-backdrop="static" id="confirmerSuppression" tabindex="-1"
+    aria-labelledby="confirmerSuppressionLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <div class="d-flex justify-content-center mb-3">
+                    <h3 class="modal-title fs-5" id="confirmerSuppressionLabel">Confirmer la suppression?</h3>
+                </div>
+                <div class="card-body text-muted d-flex justify-content-center">
+                    <p>attention : cette action est irréversible</p>
+                </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">annuler</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="confirmDeletion()">oui, je
+                    supprime</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- consulter annonce -->
+<div *ngIf="postToConsult" class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight"
+    aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h5 id="offcanvasRightLabel">Détails de l'annonce</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div>
+            <span class="d-flex justify-content-between">
+                <h5 class="breadcrumb">{{postToConsult.titre}}</h5>
+                <span *ngIf="favoris.indexOf(postToConsult.id) == -1"><i class="bi bi-heart"
+                        (click)="toogleFavoris(postToConsult.id)" data-bs-toggle="tooltip" data-bs-placement="top"
+                        title="mettre en favoris"></i></span>
+                <span *ngIf="favoris.indexOf(postToConsult.id) >= 0"><i style="color: rgb(240, 83, 33);"
+                        class="bi bi-heart-fill" (click)="toogleFavoris(postToConsult.id)" data-bs-toggle="tooltip"
+                        data-bs-placement="top" title="retirer des favoris"></i></span>
+            </span>
+        </div>
+
+        <p class="card-text breadcrumb">{{postToConsult.description}}</p>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item fw-light fst-italic fs-6"><span
+                    class="badge bg-primary">{{postToConsult.categorie.nom}}</span></li>
+            <li class="list-group-item fw-light fst-italic fs-6"><span
+                    class="badge bg-warning">{{postToConsult.type}}</span>
+            </li>
+            <li class="list-group-item fw-light fst-italic fs-6">Publié le {{postToConsult.datePublication | date:'d
+                MMMM
+                y'}}
+            </li>
+        </ul>
+    </div>
+
+</div>

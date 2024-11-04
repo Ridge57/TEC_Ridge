@@ -1,0 +1,142 @@
+<app-navbar></app-navbar>
+<section style="background-color: rgb(240, 83, 33);">
+    <div class="container">
+        <div class="row d-flex justify-content-center align-items-center">
+            <p-toast></p-toast>
+            <div class="col">
+                <div class="card card-registration my-4">
+                    <div class="row">
+                        <div class="col-xl-4">
+                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img4.webp"
+                                alt="Sample photo" class="img-fluid"
+                                style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
+                        </div>
+                        <div class="col-xl-8">
+                            <div class="card-body text-black">
+                                <!-- ETAPE 1 : INFOS -->
+                                <span *ngIf="activeIndex==0">
+                                    <div class="row mt-5">
+                                        <div class="col-md-6 mb-4">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control" id="nom"
+                                                    (input)="setNom($event)">
+                                                <label for="nom">Nom</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-4">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control" id="prenom"
+                                                    (input)="setPrenom($event)">
+                                                <label for="prenom">Prenom</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="mb-4">
+                                            <div class="form-floating">
+                                                <input type="email" class="form-control" id="email"
+                                                    (input)="setEmail($event)" required>
+                                                <label for="email">Email</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 mb-4">
+                                            <div class="form-floating form-group">
+                                                <select class="form-control" aria-label="genre" id="pays"
+                                                    (change)="selectCountry($event)">
+                                                    <option disabled selected value></option>
+                                                    <option *ngFor="let country of countries" value='{{country.name}}'>
+                                                        {{country.name}}</option>
+                                                </select>
+                                                <label for="pays">Pays de résidence</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-4">
+                                            <div class="form-floating input-group">
+                                                <span class="input-group-text"><i
+                                                        class="bi bi-telephone-fill"></i></span>
+                                                <span class="input-group-text" id="basic-addon3">{{indicatif}}</span>
+                                                <input type="number" class="form-control" id="phoneNumber"
+                                                    aria-describedby="basic-addon3 basic-addon4"
+                                                    (input)="setPhone($event)">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 mb-4">
+                                            <div class="form-floating">
+                                                <select class="form-select" aria-label="genre" id="genre"
+                                                    (change)="selectGenre($event)">
+                                                    <option disabled selected value></option>
+                                                    <option value="Homme">Homme</option>
+                                                    <option value="Femme">Femme</option>
+                                                </select>
+                                                <label for="genre">Genre</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 mb-4">
+                                            <p-multiSelect [style]="{'width':'100%'}" [panelStyle]="{'width':'100%'}"
+                                                [options]="languages" [(ngModel)]="selectedLanguages" optionLabel="name"
+                                                defaultLabel="Langues
+                                            parlées"></p-multiSelect>
+                                        </div>
+
+                                    </div>
+                                </span>
+
+
+                                <!-- ETAPE 2 : ADRESSE -->
+                                <span [style.display]="activeIndex==1 ? 'block' : 'none'">
+                                    <p-gmap [options]="options" [style]="{'width':'100%','height':'320px'}"></p-gmap>
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-floating form-group">
+                                            <select class="form-control" aria-label="genre" id="pays"
+                                                (change)="selectCity($event)">
+                                                <option disabled selected value></option>
+                                                <option *ngFor="let city of cities" value='{{city}}'>
+                                                    {{city}}</option>
+                                            </select>
+                                            <label for="pays">Adresse</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-4">
+                                            <div class="form-floating">
+                                                <input type="password" class="form-control" id="pwd"
+                                                    (input)="setPassword($event)">
+                                                <label for="pwd">mot de passe</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-4">
+                                            <div class="form-floating">
+                                                <input type="password" class="form-control" id="cpwd"
+                                                    (input)="confirmPassword($event)">
+                                                <label for="cpwd">Confirmer le mot de passe</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </span>
+
+                                <div class="d-flex justify-content-around pt-3">
+                                    <button [disabled]="activeIndex==0" type="button" id="step" data-mdb-button-init
+                                        data-mdb-ripple-init class="btn ms-2" (click)="previous()">précédent</button>
+                                    <button *ngIf="4>activeIndex" type="button" id="step" data-mdb-button-init
+                                        data-mdb-ripple-init class="btn ms-2" (click)="next()">suivre</button>
+                                    <button *ngIf="activeIndex==4" type="button" id="step" data-mdb-button-init
+                                        data-mdb-ripple-init class="btn ms-2" (click)="onSave()">créer
+                                        compte</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

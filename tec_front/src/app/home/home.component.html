@@ -1,0 +1,45 @@
+<app-navbar></app-navbar>
+<app-welcome></app-welcome>
+
+<!-- carousel -->
+<div class="container">
+    <h3 class="text-muted">Top catégories</h3>
+    <div id="carouselExampleAutoplaying" class="carousel slide mb-4" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="row">
+                    <div class="col-sm-3 mb-3 mb-sm-0" *ngFor="let categorie of categoriesFirstSet">
+                        <div class="card">
+                            <img class="card-img" [src]="buildImgPath(categorie.nom)" alt="...">
+                            <div class="card-img-overlay">
+                                <a href="#" class="btn">{{categorie.nom}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="row px-2">
+                    <div class="col-sm-3 mb-3 mb-sm-0" *ngFor="let categorie of categoriesSecondSet">
+                        <div class="card">
+                            <img class="card-img" [src]="buildImgPath(categorie.nom)" alt="...">
+                            <div class="card-img-overlay">
+                                <a href="#" class="btn">{{categorie.nom}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon bg-primary rounded" aria-hidden="false"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon bg-primary rounded" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>

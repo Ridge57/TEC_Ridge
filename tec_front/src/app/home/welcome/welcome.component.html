@@ -1,0 +1,31 @@
+<div class="container mt-2">
+    <div class="row">
+        <div class="col-6">
+            <h1 class="mb-0 mt-2">
+                Bienvenue sur<br />
+                <span class="text-uppercase" style="color: rgb(240, 83, 33)">Tous en Commun</span>.
+            </h1>
+            <h1 class="mb-4">Service d'entraide.</h1>
+            <h3 class="text-muted mb-4">
+                Nous avons besoin les uns des autres. <br />
+                Offrez un service ou faites une demande de service gratuit/payant.
+            </h3>
+            <p class="text-muted">
+                <a [routerLink]="['/besoins/new']" class="btn" style="background-color: rgb(240, 83, 33)">
+                    J'ai un besoin
+                </a>
+                <a [routerLink]="['/offres/new']" class="btn btn-outline-success m-2">
+                    J'ai une offre
+                </a>
+                <a [routerLink]="['/donations']" class="btn btn-outline-success">
+                    Faire un don
+                </a>
+            </p>
+        </div>
+        <div class="col-6">
+            <img height="400" class="first-slide" src="../../../assets/illustrations/illustration-2.png"
+                alt="First slide" />
+
+        </div>
+    </div>
+</div>

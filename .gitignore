@@ -1,0 +1,5 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+/tec_front/node_modules
+/tec_front/.angular
+/tec_front/.vscode
+/tec_back/.idea

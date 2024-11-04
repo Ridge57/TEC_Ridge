@@ -1,0 +1,84 @@
+<app-navbar></app-navbar>
+<section class="h-100 gradient-form" style="background-color: #eee;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-xl-10">
+                <div class="card rounded-3 text-black">
+                    <div class="row g-0">
+                        <div class="col-lg-6">
+                            <div class="card-body p-md-5 mx-md-4">
+
+                                <div class="text-center mb-5">
+                                    <img src="../../assets/logo/logo.png" style="width: 185px;" alt="logo">
+                                </div>
+
+                                <form>
+                                    <p-toast></p-toast>
+                                    <div class="row">
+                                        <div class="mb-4">
+                                            <div class="form-floating">
+                                                <input type="email" class="form-control" id="email"
+                                                    (input)="setEmail($event)">
+                                                <label for="email">Email</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="mb-4">
+                                            <div class="form-floating">
+                                                <input type="password" class="form-control" id="pwd"
+                                                    (input)="setPassword($event)">
+                                                <label for="pwd">Mot de passe</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-center pt-1 pb-1">
+                                        <button data-mdb-button-init data-mdb-ripple-init
+                                            class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button"
+                                            (click)="signin()">Se connecter</button>
+                                    </div>
+                                    <div class="text-center pt-1 mb-5 pb-1">
+                                        <button type="button" class="btn btn-link">Mot de passe oublié</button>
+                                    </div>
+
+                                    <div class="d-flex align-items-center justify-content-center pb-4">
+                                        <p class="mb-0 me-2">pas de compte?</p>
+                                        <button type="button" data-mdb-button-init data-mdb-ripple-init
+                                            class="btn btn-outline-danger" routerLink="/registration">Creer un
+                                            compte</button>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                            <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                                <h4 class="mb-4">Nous sommes plus qu'un simple service</h4>
+                                <p class="small">Actes 2:44-45 Tous ceux qui croyaient étaient dans le même lieu,
+                                    et
+                                    ils avaient tout en commun. Ils vendaient leurs propriétés et leurs biens, et ils en
+                                    partageaient le produit entre tous, selon les besoins de chacun.</p>
+
+                                <p class="small"> Aujourd’hui le monde est un village interconnecté paradoxalement
+                                    les hommes vivent
+                                    de plus en plus individuellement. Nous pouvons créer une communauté appliquant les
+                                    mêmes principes.
+                                </p>
+                                <ul class="small">
+                                    <li>Avoir tout en commun</li>
+                                    <li>Partager le produit entre tous (le résultat d'une activité humaine sous la forme
+                                        d'un bien ou d'un service.)</li>
+                                    <li>Distribuer à chacun selon son besoin (en vue de contribuer à éradiquer la
+                                        pauvreté
+                                        dans la société)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
